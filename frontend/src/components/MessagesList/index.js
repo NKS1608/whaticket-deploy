@@ -389,27 +389,17 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
 
     socket.on("connect", () => socket.emit("joinChatBox", `${ticket.id}`));
 
-<<<<<<< HEAD
-    socket.on(`company-${companyId}-appMessage`, (data) => {
-      if (data.action === "create") {
-=======
     const onAppMessage = (data) => {
 	  console.log("AppMessage", data);
       if (data.action === "create" && data.message.ticketId === currentTicketId) {
->>>>>>> df0f936 (* fix messages mixing on chatbox)
         dispatch({ type: "ADD_MESSAGE", payload: data.message });
         scrollToBottom();
       }
 
-<<<<<<< HEAD
-      if (data.action === "update") {
-        // console.loh(data)
-=======
       if (data.action === "update" && data.message.ticketId === currentTicketId) {
->>>>>>> df0f936 (* fix messages mixing on chatbox)
         dispatch({ type: "UPDATE_MESSAGE", payload: data.message });
       }
-    });
+    };
 
     return () => {
       socket.disconnect();
